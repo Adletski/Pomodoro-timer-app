@@ -17,7 +17,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
     var timer = Timer()
     var isTimerStarted = false
     var isAnimationStarted = false
-    var time = 10
+    var time = 25
     
     private lazy var workModeButton: UIButton = {
         let workModeButton = UIButton()
@@ -25,6 +25,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         workModeButton.setTitleColor(.black, for: .normal)
         workModeButton.layer.borderWidth = 1
         workModeButton.layer.cornerRadius = 10
+        workModeButton.backgroundColor = .gray
         workModeButton.layer.borderColor = CGColor(red: 127, green: 0, blue: 255, alpha: 1.0)
         workModeButton.addTarget(self, action: #selector(workModeButtonTapped), for: .touchUpInside)
         return workModeButton
@@ -58,6 +59,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         restartButton.setTitle("Restart", for: .normal)
         restartButton.setTitleColor(.black, for: .normal)
         restartButton.titleLabel?.font = UIFont(name: "Times New Roman", size: 30)
+//        restModeButton.backgroundColor = .blue
         restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
         return restartButton
     }()
@@ -100,7 +102,9 @@ class ViewController: UIViewController, CAAnimationDelegate {
         startButton.setTitle("Start", for: .normal)
         startButton.setTitleColor(.green, for: .normal)
         timer.invalidate()
-        time = 5
+        workModeButton.backgroundColor = .gray
+        restModeButton.backgroundColor = .white
+        time = 25
         isTimerStarted = false
         timerLabel.text = formatTime()
     }
@@ -112,7 +116,9 @@ class ViewController: UIViewController, CAAnimationDelegate {
             startButton.setTitle("Start", for: .normal)
             startButton.setTitleColor(.green, for: .normal)
             timer.invalidate()
-            time = 5
+            time = 25
+            workModeButton.backgroundColor = .gray
+            restModeButton.backgroundColor = .white
             isTimerStarted = false
             timerLabel.text = formatTime()
         } else {
@@ -195,10 +201,14 @@ class ViewController: UIViewController, CAAnimationDelegate {
     }
     @objc private func workModeButtonTapped() {
         time = 25
+        workModeButton.backgroundColor = .gray
+        restModeButton.backgroundColor = .white
         timerLabel.text = formatTime()
     }
     @objc private func restModeButtonTapped() {
         time = 5
+        restModeButton.backgroundColor = .gray
+        workModeButton.backgroundColor = .white
         timerLabel.text = formatTime()
     }
     
