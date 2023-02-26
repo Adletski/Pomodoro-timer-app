@@ -17,8 +17,28 @@ class ViewController: UIViewController, CAAnimationDelegate {
     var timer = Timer()
     var isTimerStarted = false
     var isAnimationStarted = false
-    var time = 5
+    var time = 10
     
+    private lazy var workModeButton: UIButton = {
+        let workModeButton = UIButton()
+        workModeButton.setTitle("Work mode", for: .normal)
+        workModeButton.setTitleColor(.black, for: .normal)
+        workModeButton.layer.borderWidth = 1
+        workModeButton.layer.cornerRadius = 10
+        workModeButton.layer.borderColor = CGColor(red: 127, green: 0, blue: 255, alpha: 1.0)
+        workModeButton.addTarget(self, action: #selector(workModeButtonTapped), for: .touchUpInside)
+        return workModeButton
+    }()
+    private lazy var restModeButton: UIButton = {
+        let restModeButton = UIButton()
+        restModeButton.setTitle("Rest mode", for: .normal)
+        restModeButton.setTitleColor(.black, for: .normal)
+        restModeButton.layer.borderWidth = 1
+        restModeButton.layer.cornerRadius = 10
+        restModeButton.layer.borderColor = CGColor(red: 127, green: 0, blue: 255, alpha: 1.0)
+        restModeButton.addTarget(self, action: #selector(restModeButtonTapped), for: .touchUpInside)
+        return restModeButton
+    }()
     private lazy var appLabel: UILabel = {
        let appLabel = UILabel()
         appLabel.text = "Pomodoro timer app"
@@ -134,7 +154,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         animationOfProgressLayer.keyPath = "strokeEnd"
         animationOfProgressLayer.fromValue = 0
         animationOfProgressLayer.toValue = 1
-        animationOfProgressLayer.duration = 5
+        animationOfProgressLayer.duration = CFTimeInterval(self.time)
         animationOfProgressLayer.delegate = self
         animationOfProgressLayer.isRemovedOnCompletion = false
         animationOfProgressLayer.isAdditive = true
@@ -173,9 +193,17 @@ class ViewController: UIViewController, CAAnimationDelegate {
         foregroundProgressLayer.removeAllAnimations()
         isAnimationStarted = false
     }
+    @objc private func workModeButtonTapped() {
+        time = 25
+        timerLabel.text = formatTime()
+    }
+    @objc private func restModeButtonTapped() {
+        time = 5
+        timerLabel.text = formatTime()
+    }
     
     private func setupHierarchy() {
-        let views = [timerLabel,appLabel,restartButton,startButton]
+        let views = [timerLabel,appLabel,restartButton,startButton,workModeButton,restModeButton]
         views.forEach { view.addSubview($0) }
     }
     private func setupLayout() {
@@ -194,6 +222,16 @@ class ViewController: UIViewController, CAAnimationDelegate {
         startButton.snp.makeConstraints { startButton in
             startButton.centerX.equalTo(view).offset(100)
             startButton.bottom.equalTo(view).inset(75)
+        }
+        workModeButton.snp.makeConstraints { workModeButton in
+            workModeButton.centerX.equalTo(view).offset(-85)
+            workModeButton.top.equalTo(view).offset(170)
+            workModeButton.width.equalTo(110)
+        }
+        restModeButton.snp.makeConstraints { restModeButton in
+            restModeButton.centerX.equalTo(view).offset(85)
+            restModeButton.top.equalTo(view).offset(170)
+            restModeButton.width.equalTo(110)
         }
     }
     
