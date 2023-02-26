@@ -132,14 +132,14 @@ class ViewController: UIViewController, CAAnimationDelegate {
         return String(format: "%02i:%02i", minutes, seconds)
     }
     func drawBackgroundLayer() {
-        backgroundProgressLayer.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: 150, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
+        backgroundProgressLayer.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: view.frame.width*0.381, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
         backgroundProgressLayer.strokeColor = UIColor.black.cgColor
         backgroundProgressLayer.fillColor = UIColor.clear.cgColor
         backgroundProgressLayer.lineWidth = 15
         view.layer.addSublayer(backgroundProgressLayer)
     }
     func drawForegroundLayer() {
-        foregroundProgressLayer.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: 150, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
+        foregroundProgressLayer.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.midX, y: view.frame.midY), radius: view.frame.width*0.381, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
         foregroundProgressLayer.strokeColor = UIColor.red.cgColor
         foregroundProgressLayer.fillColor = UIColor.clear.cgColor
         foregroundProgressLayer.lineWidth = 15
@@ -223,25 +223,25 @@ class ViewController: UIViewController, CAAnimationDelegate {
         }
         appLabel.snp.makeConstraints { appLabel in
             appLabel.centerX.equalTo(view)
-            appLabel.top.equalTo(view).offset(100)
+            appLabel.top.equalTo(view).offset(view.frame.height*0.117)
         }
         restartButton.snp.makeConstraints { restartButton in
-            restartButton.centerX.equalTo(view).offset(-100)
-            restartButton.bottom.equalTo(view).inset(75)
+            restartButton.centerX.equalTo(view).offset(-view.frame.width*0.254)
+            restartButton.bottom.equalTo(view).inset(view.frame.height*0.088)
         }
         startButton.snp.makeConstraints { startButton in
-            startButton.centerX.equalTo(view).offset(100)
-            startButton.bottom.equalTo(view).inset(75)
+            startButton.centerX.equalTo(view).offset(view.frame.width*0.254)
+            startButton.bottom.equalTo(view).inset(view.frame.height*0.088)
         }
         workModeButton.snp.makeConstraints { workModeButton in
-            workModeButton.centerX.equalTo(view).offset(-85)
-            workModeButton.top.equalTo(view).offset(170)
-            workModeButton.width.equalTo(110)
+            workModeButton.centerX.equalTo(view).offset(-view.frame.width*0.216)
+            workModeButton.top.equalTo(view).offset(view.frame.height*0.199)
+            workModeButton.width.equalTo(view.frame.width*0.279)
         }
         restModeButton.snp.makeConstraints { restModeButton in
-            restModeButton.centerX.equalTo(view).offset(85)
-            restModeButton.top.equalTo(view).offset(170)
-            restModeButton.width.equalTo(110)
+            restModeButton.centerX.equalTo(view).offset(view.frame.width*0.216)
+            restModeButton.top.equalTo(view).offset(view.frame.height*0.199)
+            restModeButton.width.equalTo(view.frame.width*0.279)
         }
     }
     
